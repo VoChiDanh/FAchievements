@@ -1,0 +1,10 @@
+name: '${project.name}'
+version: '${project.version}'
+main: net.danh.achievements.Achievements
+api-version: 1.13
+authors: [ VoChiDanh ]
+commands:
+  FAchievements:
+    usage: /<command>
+    aliases: [fac]
+    description: Achieve some impossible stuff!

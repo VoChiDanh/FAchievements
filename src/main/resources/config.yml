@@ -1,0 +1,4 @@
+Help:
+  - "&a/FAchievements <player> <achievement> &f- &7You need an achievement to send!"
+Achievements: "%p has just earned the achievement %a"
+Error: "&f[&bFAchievements&f] Insufficient or redundant statement!"
