@@ -9,10 +9,12 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 
@@ -23,7 +25,10 @@ public class Achievements extends JavaPlugin implements Listener {
 
 
     public void onEnable() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, (Plugin)this);
+        Bukkit.getServer().getPluginManager().registerEvents(this, (Plugin) this);
+        createConfigs();
+
+
     }
 
     public void onDisable() {
@@ -53,16 +58,22 @@ public class Achievements extends JavaPlugin implements Listener {
     public String convert(String s) {
         return s.replace("&", "§");
     }
+
+
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         if (cmd.getName().equalsIgnoreCase("FAchievements")) {
             if (args.length == 0) {
                 for (String helpadmin : getConfig().getStringList("Help")) {
                     sender.sendMessage(convert(helpadmin));
+                    return true;
                 }
             }
-            if (args.length == 1) {
-                sender.sendMessage(convert(getConfig().getString("Error")));
+
+            if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+                reloadConfigs();
+                sender.sendMessage(convert(getConfig().getString("Reload")));
             }
+
             if (args.length >= 2) {
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < args.length; i++) {
@@ -78,10 +89,10 @@ public class Achievements extends JavaPlugin implements Listener {
                 String fakeAchieve = sb.toString();
                 String target = args[0];
                 Bukkit.getServer().broadcastMessage(convert(getConfig().getString("Achievements")).replace("%p", String.valueOf(String.valueOf(target))).replace("%a", fakeAchieve));
+                return true;
             }
-            if (args.length > 3)
-                sender.sendMessage(convert(getConfig().getString("Error")));
         }
+
         return true;
     }
 }

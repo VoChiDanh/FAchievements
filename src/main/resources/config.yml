@@ -1,4 +1,5 @@
 Help:
   - "&a/FAchievements <player> <achievement> &f- &7You need an achievement to send!"
-Achievements: "%p has just earned the achievement %a"
-Error: "&f[&bFAchievements&f] Insufficient or redundant statement!"
+  - "&a/FAchievements reload &f-&a Reload config"
+Achievements: "&a%p &ahas just earned the achievement&b %a"
+Reload: "&f[&bFAchievements&f]&a Reloaded "
